@@ -20,7 +20,10 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
+  
 
+    df['TransactionDT_hour'] = (df['TransactionDT'] // 3600) % 24
+    df['TransactionDT_day'] = df['TransactionDT'] // 86400
     st.subheader("Uploaded Data")
     st.dataframe(df.head())
 
